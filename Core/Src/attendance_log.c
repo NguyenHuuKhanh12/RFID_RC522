@@ -1,29 +1,5 @@
-/* ====================================================================
- * SV3_attendance_log.c  -  NHIEM VU SINH VIEN 3
- * "Nhat ky diem danh: timestamp RTC, bo dem vong luu Flash, xuat CSV qua UART"
- *
- * Gom (tu attendance_log.c goc): ATTLOG_Init (RTC + quet Flash), GetTime (RTC),
- * AddRecord (ghi Flash vong 4 page), ExportSingleRecord / ExportCSV (UART),
- * EraseAll, OnUartCommand ('*' xuat CSV, '#' xoa).
- *
- * Phan cua SV khac duoc tach khoi file nay:
- *   - ATTLOG_Classify (xu ly di muon theo gio quy dinh) -> SV4_oled_alert.c
- *
- * Luu y: vong lap nhan UART ('*' / '#') nam trong main.c (khong sua),
- *        goi ATTLOG_OnUartCommand() cua file nay.
- *
- * File thay the cho: attendance_log.c
- * Header di kem: SV3_attendance_log.h (attendance_log.h)
- *
- * KY HIEU DANH DAU (grep trong file de tim):
- *   ##CROSS##  : cho nay GOI / DUNG ham, bien cua SV khac (ghi ro SV nao)
- *   ##NEW##    : ham / dong them moi de noi cac SV voi nhau, KHONG co trong code goc
- *   ##MOVED##  : code goc nam o file khac, da chuyen ve file cua SV nay
- *   Moi cau lenh con lai la code goc, giu nguyen.
- * ==================================================================== */
-
-#include "SV3_attendance_log.h"
-#include "SV4_oled_alert.h"   /* ##CROSS## SV4: USER_ShowMessage(), ATTLOG_Classify() */
+#include "attendance_log.h"
+#include "ui.h"
 #include <string.h>
 #include <stdio.h>
 
@@ -38,7 +14,6 @@
 #define RECORDS_PER_PAGE  (FLASH_PAGE_SIZE / sizeof(Record_t))
 
 #define RTC_INIT_MARKER   0x4205U
-
 
 static RTC_HandleTypeDef *local_hrtc = NULL;
 static uint8_t  current_page = 0;
@@ -104,8 +79,13 @@ static void ATTLOG_GetTime(Record_t *record)
     record->year   = sDate.Year;
 }
 
-/* ##CROSS## ATTLOG_Classify() (xu ly di muon theo gio quy dinh) la nhiem vu SV4
- * -> da chuyen sang SV4_oled_alert.c (##MOVED##), prototype trong SV4_oled_alert.h. */
+static uint8_t ATTLOG_Classify(uint8_t hour, uint8_t minute)
+{
+    // Truoc 8h00 la dung gio, tu 8h01 tro di la muon
+    if (hour < 8) return 0;
+    if (hour == 8 && minute == 0) return 0;
+    return 1;
+}
 
 static int ATTLOG_IsWrapped(void)
 {
@@ -173,7 +153,7 @@ int ATTLOG_AddRecord(uint8_t *uid, Record_t *out)
     rec.magic = RECORD_MAGIC;
     memcpy(rec.uid, uid, 4);
     ATTLOG_GetTime(&rec);
-    rec.status = ATTLOG_Classify(rec.hour, rec.minute);  /* ##CROSS## SV4 (gio quy dinh di muon) */
+    rec.status = ATTLOG_Classify(rec.hour, rec.minute);
 
     // Ring buffer: het page thi sang page ke tiep + xoa page do truoc
     if (current_slot >= RECORDS_PER_PAGE) {
@@ -280,6 +260,6 @@ void ATTLOG_OnUartCommand(uint8_t cmd)
     } else if (cmd == '#') {
         ATTLOG_EraseAll();
         // Thong bao tren OLED, khong ghi vao UART de log chi con CSV
-        USER_ShowMessage("LOG DIEM DANH", "DA XOA", "Xoa toan bo log", "");  /* ##CROSS## SV4 (OLED) */
+        UI_ShowResult("LOG DIEM DANH", "DA XOA", "Xoa toan bo log", "");
     }
 }
