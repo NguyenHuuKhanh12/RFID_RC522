@@ -5,10 +5,13 @@
 <h2>Tool Versions:</h2>
 IDE-Version: µVision V5.40.0.0
 Copyright (C) 2024 ARM Ltd and ARM Germany GmbH. All rights reserved.
-License Information: khanh DELL, khanh, LIC=----
+License Information: khanh DELL
+khanh
+User-based license: Keil MDK Community (non-commercial free of charge)
+Valid until: Jun 1 2033. Cached until: Oct 28 2026
  
 Tool Versions:
-Toolchain:       MDK-Lite  Version: 5.40.0.3
+Toolchain:       Keil MDK Community (non-commercial free of charge  Version: 5.40.0.3
 Toolchain Path:  D:\KEIL C\ARM\ARMCLANG\Bin
 C Compiler:      ArmClang.exe V6.22
 Assembler:       Armasm.exe V6.22
@@ -21,18 +24,19 @@ Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.3.0.0
 Dialog DLL:      TCM.DLL V1.56.4.0
  
 <h2>Project:</h2>
-D:\STM32 file\RFID_rc522_\MDK-ARM\RFID_rc522_.uvprojx
-Project File Date:  10/20/2026
+D:\STM32 file\RFID_RC522-main\MDK-ARM\RFID_rc522_.uvprojx
+Project File Date:  10/21/2026
 
 <h2>Output:</h2>
 *** Using Compiler 'V6.22', folder: 'D:\KEIL C\ARM\ARMCLANG\Bin'
 Build target 'RFID_rc522_'
-../mylib/rfid_app.c(4): error: 'attendance_log.h' file not found
-    4 | #include "attendance_log.h"
-      |          ^~~~~~~~~~~~~~~~~~
-1 error generated.
-compiling rfid_app.c...
-"RFID_rc522_\RFID_rc522_.axf" - 1 Error(s), 0 Warning(s).
+Note: source file '..\mylib\attendance_log.c' - object file renamed from 'RFID_rc522_\attendance_log.o' to 'RFID_rc522_\attendance_log_1.o'.
+Note: source file '..\mylib\card_db.c' - object file renamed from 'RFID_rc522_\card_db.o' to 'RFID_rc522_\card_db_1.o'.
+Note: source file '..\mylib\user.c' - object file renamed from 'RFID_rc522_\user.o' to 'RFID_rc522_\user_1.o'.
+linking...
+Program Size: Code=32168 RO-data=1500 RW-data=32 ZI-data=3160  
+FromELF: creating hex file...
+"RFID_rc522_\RFID_rc522_.axf" - 0 Error(s), 0 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -56,8 +60,7 @@ Package Vendor: Keil
 
    * Component: ARM::CMSIS:CORE@6.1.0
       Include file:  CMSIS/Core/Include/tz_context.h
-Target not created.
-Build Time Elapsed:  00:00:00
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>

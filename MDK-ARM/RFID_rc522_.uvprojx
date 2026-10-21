@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F103xB</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F1xx/Include;../Drivers/CMSIS/Include;..\mylib</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F1xx/Include;../Drivers/CMSIS/Include;../mylib</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -507,8 +507,33 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>rc522</GroupName>
+          <GroupName>mylib</GroupName>
           <Files>
+            <File>
+              <FileName>alert.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\mylib\alert.c</FilePath>
+            </File>
+            <File>
+              <FileName>alert.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\mylib\alert.h</FilePath>
+            </File>
+            <File>
+              <FileName>OLED.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\mylib\OLED.c</FilePath>
+            </File>
+            <File>
+              <FileName>OLED.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\mylib\OLED.h</FilePath>
+            </File>
+            <File>
+              <FileName>ui.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\mylib\ui.h</FilePath>
+            </File>
             <File>
               <FileName>rc522.c</FileName>
               <FileType>1</FileType>
@@ -528,6 +553,51 @@
               <FileName>rfid_app.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\mylib\rfid_app.h</FilePath>
+            </File>
+            <File>
+              <FileName>ui.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\mylib\ui.c</FilePath>
+            </File>
+            <File>
+              <FileName>attendance_log.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\mylib\attendance_log.c</FilePath>
+            </File>
+            <File>
+              <FileName>attendance_log.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\mylib\attendance_log.h</FilePath>
+            </File>
+            <File>
+              <FileName>button.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\mylib\button.c</FilePath>
+            </File>
+            <File>
+              <FileName>button.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\mylib\button.h</FilePath>
+            </File>
+            <File>
+              <FileName>card_db.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\mylib\card_db.c</FilePath>
+            </File>
+            <File>
+              <FileName>card_db.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\mylib\card_db.h</FilePath>
+            </File>
+            <File>
+              <FileName>user.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\mylib\user.c</FilePath>
+            </File>
+            <File>
+              <FileName>user.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\mylib\user.h</FilePath>
             </File>
           </Files>
         </Group>

@@ -20,6 +20,15 @@
 "rfid_rc522_\stm32f1xx_hal_spi.o"
 "rfid_rc522_\stm32f1xx_hal_uart.o"
 "rfid_rc522_\system_stm32f1xx.o"
+"rfid_rc522_\alert.o"
+"rfid_rc522_\oled.o"
+"rfid_rc522_\rc522.o"
+"rfid_rc522_\rfid_app.o"
+"rfid_rc522_\ui.o"
+"rfid_rc522_\attendance_log_1.o"
+"rfid_rc522_\button.o"
+"rfid_rc522_\card_db_1.o"
+"rfid_rc522_\user_1.o"
 --strict --scatter "RFID_rc522_\RFID_rc522_.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

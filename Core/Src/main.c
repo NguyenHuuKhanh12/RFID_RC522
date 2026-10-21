@@ -21,6 +21,12 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "rfid_app.h"
+#include <string.h>
+#include <stdio.h>
+#include "attendance_log.h"
+#include "user.h"
+#include "OLED.h"
 
 /* USER CODE END Includes */
 
@@ -49,23 +55,21 @@ SPI_HandleTypeDef hspi1;
 UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN PV */
-
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
-static void MX_I2C1_Init(void);
-static void MX_RTC_Init(void);
 static void MX_SPI1_Init(void);
 static void MX_USART1_UART_Init(void);
+static void MX_I2C1_Init(void);
+static void MX_RTC_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
 /* USER CODE END 0 */
 
 /**
@@ -97,12 +101,17 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_I2C1_Init();
-  MX_RTC_Init();
   MX_SPI1_Init();
   MX_USART1_UART_Init();
+  MX_I2C1_Init();
+  MX_RTC_Init();
   /* USER CODE BEGIN 2 */
 
+    OLED_Init(&hi2c1);
+    RFID_App_Init(&hspi1, &huart1);
+		ATTLOG_Init(&hrtc);
+    USER_Init();  		/* Sinh vien 2: quan ly the trong Flash */
+		
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -112,6 +121,17 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+    
+		RFID_App_Task();
+		
+    /* Sinh vien 2: nhan lenh UART de export CSV (*) hoac xoa (#) */
+    uint8_t rx_char;
+    if (HAL_UART_Receive(&huart1, &rx_char, 1, 0) == HAL_OK) {
+        ATTLOG_OnUartCommand(rx_char);
+    }
+
+    HAL_Delay(1);
+
   }
   /* USER CODE END 3 */
 }
