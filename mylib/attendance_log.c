@@ -105,11 +105,11 @@ void ATTLOG_Init(RTC_HandleTypeDef *hrtc)
     // Chi khoi tao gio 1 lan dau tien
     if (HAL_RTCEx_BKUPRead(local_hrtc, RTC_BKP_DR1) != RTC_INIT_MARKER) {
         RTC_TimeTypeDef sTime = {0};
-        sTime.Hours = 9; sTime.Minutes = 12; sTime.Seconds = 0;
+        sTime.Hours = 7; sTime.Minutes = 36; sTime.Seconds = 0;
         HAL_RTC_SetTime(local_hrtc, &sTime, RTC_FORMAT_BIN);
 
         RTC_DateTypeDef sDate = {0};
-        sDate.Date = 13; sDate.Month = 10; sDate.Year = 26;
+        sDate.Date = 20; sDate.Month = 10; sDate.Year = 26;
         sDate.WeekDay = RTC_WEEKDAY_MONDAY;
         HAL_RTC_SetDate(local_hrtc, &sDate, RTC_FORMAT_BIN);
 
